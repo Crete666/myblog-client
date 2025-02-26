@@ -1,0 +1,19 @@
+.project {
+  margin-top: 5px;
+  border-top: 1px solid gray;
+}
+
+.project-box {
+  margin-top: 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  background-color: white;
+  width: 180px;
+  height: 150px;
+  display: flex;
+}
+
+.project-image {
+  width: 180px;
+  height: 150px;
+}
