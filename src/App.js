@@ -2,6 +2,7 @@ import "./App.css";
 import React, { Fragment } from "react";
 
 import SideLeftComponent from "./sideLeft";
+import SideRightComponent from "./sideRight";
 import HeaderComponent from "./header";
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
             <div id="center">
               <div id="last-content"></div>
             </div>
-            <div id="side-right"></div>
+            <div id="side-right">
+              <SideRightComponent />
+            </div>
           </div>
         </div>
       </div>
