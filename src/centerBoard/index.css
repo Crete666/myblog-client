@@ -44,3 +44,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+#paging-place {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

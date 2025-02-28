@@ -15,7 +15,7 @@ function CenterBoard() {
 
   React.useEffect(() => {
     axios
-      .get(`${API_URL}/boards`, {
+      .get(`http://localhost:8080/boards`, {
         params: {
           page: page,
         },
@@ -23,7 +23,7 @@ function CenterBoard() {
       .then(function (result) {
         const boards = result.data.board;
         setBoards(boards);
-        setTotalitems(boards[0].id);
+        setTotalitems(result.data.totalCount);
       })
       .catch(function (error) {
         console.error("에러 발생 : ", error);
@@ -50,12 +50,14 @@ function CenterBoard() {
           </a>
         );
       })}
-      <Pagination
-        totalItems={totalItems}
-        currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
-        pageCount={5}
-        itemCountPerPage={5}
-      />
+      <div id="paging-place">
+        <Pagination
+          totalItems={totalItems}
+          currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+          pageCount={5}
+          itemCountPerPage={5}
+        />
+      </div>
     </div>
   );
 }

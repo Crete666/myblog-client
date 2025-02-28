@@ -1,0 +1,51 @@
+#upload-img-placeholder {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(230, 230, 230);
+  background: rgb(250, 250, 253);
+  border-radius: 8px;
+}
+
+#upload-img-placeholder > img {
+  width: 50px;
+  height: 50px;
+}
+
+#upload-img-placeholder > span {
+  font-size: 14px;
+  color: rgb(195, 194, 204);
+}
+
+.upload-title {
+  width: 200px;
+  justify-content: center;
+}
+
+.upload-label {
+  font-size: 16px;
+  width: 100px;
+  text-align: center;
+}
+
+#upload-contents {
+  height: 150px;
+}
+
+.submit-data {
+  float: right;
+  background-color: rgb(30, 120, 255);
+  color: white;
+  border: none;
+  margin-top: 16px;
+}
+
+#project-img {
+  width: 200px;
+  height: 200px;
+  margin-left: 16px;
+  object-fit: contain;
+}
