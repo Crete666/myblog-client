@@ -15,7 +15,7 @@ function CenterBoard() {
 
   React.useEffect(() => {
     axios
-      .get(`http://localhost:8080/boards`, {
+      .get(`${API_URL}/boards`, {
         params: {
           page: page,
         },

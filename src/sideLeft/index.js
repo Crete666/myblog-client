@@ -22,15 +22,17 @@ function SideLeft() {
       {projects.map(function (project, index) {
         return (
           <div className="project" key={index}>
-            <b>{project.name}</b>
             <div className="project-box">
               <a href={`${project.hubUrl}`} target="_blank">
                 <img
                   className="project-image"
-                  src={`${project.imageUrl}`}
+                  src={`${API_URL}/${project.imageUrl}`}
                   alt={`${project.name}`}
                 />
               </a>
+            </div>
+            <div className="project-name">
+              <b>{project.name}</b>
             </div>
           </div>
         );
