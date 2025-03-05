@@ -81,7 +81,7 @@ function InsertData() {
         </Form>
         <Divider />
         <div id="insert-project">
-          <b>Project</b>
+          <b>Project 등록하기</b>
           <Form name="프로젝트 업로드" onFinish={onSubmitProject}>
             <Form.Item
               name="name"
@@ -131,7 +131,7 @@ function InsertData() {
             </Form.Item>
             <Form.Item>
               <Button className="submit-data" size="large" htmlType="submit">
-                프로젝트 등록하기
+                Project 등록하기
               </Button>
             </Form.Item>
           </Form>
