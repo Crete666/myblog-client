@@ -7,6 +7,7 @@ import SideRightComponent from "./sideRight";
 import HeaderComponent from "./header";
 import CenterBoardComponent from "./centerBoard";
 import InsertData from "./insertData";
+import DetailBoard from "./detailBoard";
 
 function App() {
   return (
@@ -29,9 +30,13 @@ function App() {
                   <Route
                     exact={true}
                     path="/"
-                    render={() => <Navigate to="/myblog" />}
+                    element={<Navigate to="/myblog" replace />}
                   />
-                  <Route exact={true} path="/myblog"></Route>
+                  <Route
+                    exact={true}
+                    path="/myblog"
+                    element={<DetailBoard />}
+                  ></Route>
                   <Route
                     exact={true}
                     path="/insertData"

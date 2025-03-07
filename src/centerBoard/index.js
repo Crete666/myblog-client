@@ -40,7 +40,7 @@ function CenterBoard() {
       </div>
       {boards.map(function (board, index) {
         return (
-          <a href={`/myblog/${board.id}`} key={index}>
+          <a href={`/myblog?id=${board.id}&page=${page}`} key={index}>
             <div className="center-board-row">
               <div className="board-title">{board.title}</div>
               <div className="board-createAt">

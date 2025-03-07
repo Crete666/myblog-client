@@ -3,11 +3,9 @@ import { API_URL } from "../config/constants.js";
 import { Form, Input, Button, Divider, Upload, message } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function InsertData() {
   const [imageUrl, setImageUrl] = useState(null);
-  const navigate = useNavigate();
   const onSubmitBoatd = (values) => {
     axios
       .post(`${API_URL}/insertBoard`, {
@@ -16,7 +14,7 @@ function InsertData() {
       })
       .then((result) => {
         console.log(result);
-        navigate("/myblog");
+        window.location.replace("/myblog");
       })
       .catch((error) => {
         console.error(error);
@@ -32,7 +30,7 @@ function InsertData() {
       })
       .then((result) => {
         console.log(result);
-        navigate("/myblog");
+        window.location.replace("/myblog");
       })
       .catch((error) => {
         console.error(error);

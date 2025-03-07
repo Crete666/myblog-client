@@ -1,0 +1,21 @@
+#detail-head {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+
+#detail-title {
+  font-size: 30px;
+  width: 80%;
+}
+
+#detail-createAt {
+  width: 20%;
+  display: flex;
+  justify-content: right;
+}
+
+#detail-createAt-text {
+  color: gray;
+  font-size: 15px;
+}
