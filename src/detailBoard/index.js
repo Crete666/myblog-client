@@ -8,7 +8,8 @@ import dayjs from "dayjs";
 function DetailBoard() {
   const [searchParams] = useSearchParams();
   let id = searchParams.get("id");
-  let page = searchParams.get("page");
+  let boardPage = searchParams.get("BP");
+  let projectPage = searchParams.get("PP");
 
   const [board, setBoard] = useState(null);
   const navigate = useNavigate();
@@ -31,8 +32,8 @@ function DetailBoard() {
       .then((result) => {
         id = result.data.id;
         setBoard(result.data.board);
-        if (!page) {
-          navigate(`/myblog?page=1&id=${id}`, { replace: true });
+        if (!boardPage && !projectPage) {
+          navigate(`/myblog?id=${id}&BP=1&PP=1`, { replace: true });
         }
       })
       .catch((error) => {
@@ -41,7 +42,7 @@ function DetailBoard() {
   };
 
   useEffect(function () {
-    if (!id && !page) {
+    if (!id && !boardPage && !projectPage) {
       getBoardRecently();
     } else {
       getBoard();

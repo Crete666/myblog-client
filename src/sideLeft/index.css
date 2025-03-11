@@ -22,3 +22,9 @@
   display: flex;
   justify-content: center;
 }
+
+#paging-place {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

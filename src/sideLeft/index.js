@@ -2,20 +2,35 @@ import React from "react";
 import "./index.css";
 import axios from "axios";
 import { API_URL } from "../config/constants.js";
+import { useLocation } from "react-router-dom";
+import Pagination from "../pagination";
 
 function SideLeft() {
   const [projects, setProjects] = React.useState([]);
-  React.useEffect(function () {
-    axios
-      .get(`${API_URL}/projects`)
-      .then(function (result) {
-        const projects = result.data.projects;
-        setProjects(projects);
-      })
-      .catch(function (error) {
-        console.error("에러 발생 : ", error);
-      });
-  }, []);
+  const [totalItems, setTotalitems] = React.useState(0);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const projectPage = searchParams.get("PP");
+
+  React.useEffect(
+    function () {
+      axios
+        .get(`${API_URL}/projects`, {
+          params: {
+            page: projectPage,
+          },
+        })
+        .then(function (result) {
+          const projects = result.data.projects;
+          setProjects(projects);
+          setTotalitems(result.data.totalCount);
+        })
+        .catch(function (error) {
+          console.error("에러 발생 : ", error);
+        });
+    },
+    [projectPage]
+  );
   return (
     <div>
       <h2>Project</h2>
@@ -23,7 +38,11 @@ function SideLeft() {
         return (
           <div className="project" key={index}>
             <div className="project-box">
-              <a href={`${project.hubUrl}`} target="_blank">
+              <a
+                href={`${project.hubUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   className="project-image"
                   src={`${API_URL}/${project.imageUrl}`}
@@ -37,6 +56,17 @@ function SideLeft() {
           </div>
         );
       })}
+      <div id="paging-place">
+        <Pagination
+          totalItems={totalItems}
+          currentPage={
+            projectPage && parseInt(projectPage) > 0 ? parseInt(projectPage) : 1
+          }
+          pageCount={5}
+          itemCountPerPage={5}
+          pagingSpace={"project"}
+        />
+      </div>
     </div>
   );
 }

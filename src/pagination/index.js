@@ -1,8 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./index.css";
 
-function Pagination({ totalItems, itemCountPerPage, pageCount, currentPage }) {
+function Pagination({
+  totalItems,
+  itemCountPerPage,
+  pageCount,
+  currentPage,
+  pagingSpace,
+}) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const boardId = searchParams.get("id");
+  const boardPage = searchParams.get("BP");
+  const projectPage = searchParams.get("PP");
+  const space = pagingSpace;
+
+  const getUrl = (space, page) => {
+    if (space === "board") {
+      return `?id=${boardId}&BP=${page}&PP=${projectPage}`;
+    } else {
+      return `?id=${boardId}&BP=${boardPage}&PP=${page}`;
+    }
+  };
+
   const totalPages = Math.ceil(totalItems / itemCountPerPage);
   const [start, setStart] = useState(1);
   const noPrev = start === 1;
@@ -16,7 +37,7 @@ function Pagination({ totalItems, itemCountPerPage, pageCount, currentPage }) {
     <div className="wrapper">
       <ul className="pagination">
         <li className={`move ${noPrev ? "invisible" : ""}`}>
-          <Link to={`?page=${start - 1}`}>이전</Link>
+          <Link to={getUrl(space, start - 1)}>이전</Link>
         </li>
         {[...Array(pageCount)].map((_, i) => (
           <>
@@ -26,7 +47,7 @@ function Pagination({ totalItems, itemCountPerPage, pageCount, currentPage }) {
                   className={`page ${
                     currentPage === start + i ? "active" : ""
                   }`}
-                  to={`?page=${start + i}`}
+                  to={getUrl(space, start + i)}
                 >
                   {start + i}
                 </Link>
@@ -35,7 +56,7 @@ function Pagination({ totalItems, itemCountPerPage, pageCount, currentPage }) {
           </>
         ))}
         <li className={`move ${noNext ? "invisible" : ""}`}>
-          <Link to={`?page=${start + pageCount}`}>다음</Link>
+          <Link to={getUrl(space, start + pageCount)}>다음</Link>
         </li>
       </ul>
     </div>

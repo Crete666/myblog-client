@@ -11,13 +11,14 @@ function CenterBoard() {
   const [totalItems, setTotalitems] = React.useState(0);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const page = searchParams.get("page");
+  const boardPage = searchParams.get("BP");
+  const projectPage = searchParams.get("PP");
 
   React.useEffect(() => {
     axios
       .get(`${API_URL}/boards`, {
         params: {
-          page: page,
+          page: boardPage,
         },
       })
       .then(function (result) {
@@ -28,7 +29,7 @@ function CenterBoard() {
       .catch(function (error) {
         console.error("에러 발생 : ", error);
       });
-  }, [page]);
+  }, [boardPage]);
 
   return (
     <div id="blog-board">
@@ -40,7 +41,10 @@ function CenterBoard() {
       </div>
       {boards.map(function (board, index) {
         return (
-          <a href={`/myblog?id=${board.id}&page=${page}`} key={index}>
+          <a
+            href={`/myblog?id=${board.id}&BP=${boardPage}&PP=${projectPage}`}
+            key={index}
+          >
             <div className="center-board-row">
               <div className="board-title">{board.title}</div>
               <div className="board-createAt">
@@ -53,9 +57,12 @@ function CenterBoard() {
       <div id="paging-place">
         <Pagination
           totalItems={totalItems}
-          currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+          currentPage={
+            boardPage && parseInt(boardPage) > 0 ? parseInt(boardPage) : 1
+          }
           pageCount={5}
           itemCountPerPage={5}
+          pagingSpace={"board"}
         />
       </div>
     </div>
