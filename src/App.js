@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { Fragment } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import SideLeftComponent from "./sideLeft";
 import SideRightComponent from "./sideRight";
@@ -10,6 +10,8 @@ import InsertData from "./insertData";
 import DetailBoard from "./detailBoard";
 
 function App() {
+  const location = useLocation();
+
   return (
     <Fragment>
       <div>
@@ -24,7 +26,7 @@ function App() {
               <SideLeftComponent />
             </div>
             <div id="center">
-              <CenterBoardComponent />
+              {location.pathname !== "/insertData" && <CenterBoardComponent />}
               <div id="last-content">
                 <Routes>
                   <Route

@@ -21,25 +21,17 @@
 }
 
 .upload-title {
-  width: 200px;
+  width: 100%;
   justify-content: center;
-}
-
-.upload-label {
-  font-size: 16px;
-  width: 100px;
-  text-align: center;
-}
-
-#upload-contents {
-  height: 150px;
+  border: 1px solid black;
+  font-size: 14px;
 }
 
 .submit-data {
   float: right;
   background-color: rgb(30, 120, 255);
   color: white;
-  border: none;
+  border: 1px solid black;
 }
 
 #project-img {
@@ -47,4 +39,39 @@
   height: 200px;
   margin-left: 16px;
   object-fit: contain;
+}
+
+.ant-form-item {
+  margin-bottom: 4px;
+}
+
+.item-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.editor-wrapper-class {
+  margin: 0 auto;
+  margin-bottom: 4px;
+}
+
+.editor {
+  height: 500px !important;
+  border: 1px solid black !important;
+  padding: 5px !important;
+  border-radius: 8px !important;
+}
+
+.editor-toolbar-class {
+  border: 1px solid black !important;
+  border-radius: 8px !important;
+}
+
+.editor-toolbar-class img {
+  width: 15px;
+}
+
+.rdw-editor-main {
+  overflow: hidden !important;
 }

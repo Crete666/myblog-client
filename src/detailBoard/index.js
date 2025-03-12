@@ -5,6 +5,16 @@ import axios from "axios";
 import { API_URL } from "../config/constants";
 import dayjs from "dayjs";
 
+import styled from "styled-components";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+
+// 변환시켜준 editorState 값을 넣기 위한 div 태그 css
+const IntroduceContent = styled.div`
+  width: 100%;
+  margin-top: 4px;
+`;
+
 function DetailBoard() {
   const [searchParams] = useSearchParams();
   let id = searchParams.get("id");
@@ -13,6 +23,12 @@ function DetailBoard() {
 
   const [board, setBoard] = useState(null);
   const navigate = useNavigate();
+
+  function contentData(contents) {
+    console.log("draftToHtml");
+    console.log(draftToHtml(htmlToDraft(contents)));
+    return draftToHtml(htmlToDraft(contents));
+  }
 
   const getBoard = () => {
     axios
@@ -32,6 +48,7 @@ function DetailBoard() {
       .then((result) => {
         id = result.data.id;
         setBoard(result.data.board);
+        contentData = board.contents;
         if (!boardPage && !projectPage) {
           navigate(`/myblog?id=${id}&BP=1&PP=1`, { replace: true });
         }
@@ -54,7 +71,7 @@ function DetailBoard() {
   }
 
   return (
-    <div>
+    <div id="detail">
       <div id="detail-head">
         <div id="detail-title">{board.title}</div>
         <div id="detail-createAt">
@@ -63,7 +80,11 @@ function DetailBoard() {
           </span>
         </div>
       </div>
-      <div id="detail-content">{board.contents}</div>
+      <div id="detail-content">
+        <IntroduceContent
+          dangerouslySetInnerHTML={{ __html: board.contents }}
+        />
+      </div>
     </div>
   );
 }

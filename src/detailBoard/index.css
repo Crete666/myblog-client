@@ -19,3 +19,11 @@
   color: gray;
   font-size: 15px;
 }
+
+#detail {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  min-height: 500px;
+  margin-bottom: 10px;
+}
