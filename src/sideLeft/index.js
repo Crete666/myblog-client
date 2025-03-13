@@ -1,20 +1,21 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./index.css";
 import axios from "axios";
 import { API_URL } from "../config/constants.js";
 import { useLocation } from "react-router-dom";
 import Pagination from "../pagination";
 
-function SideLeft() {
+const SideLeft = forwardRef((props, ref) => {
   const [projects, setProjects] = React.useState([]);
   const [totalItems, setTotalitems] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const projectPage = searchParams.get("PP");
 
-  React.useEffect(
-    function () {
-      axios
+  React.useEffect(() => {
+    async function fetchProject() {
+      await axios
         .get(`${API_URL}/projects`, {
           params: {
             page: projectPage,
@@ -27,12 +28,21 @@ function SideLeft() {
         })
         .catch(function (error) {
           console.error("에러 발생 : ", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-    },
-    [projectPage]
-  );
+    }
+
+    fetchProject();
+  }, [projectPage]);
+
+  if (isLoading) {
+    return <p>데이터를 불러오는 중...</p>;
+  }
+
   return (
-    <div>
+    <div id="sideLeft-project" ref={ref}>
       <h2>Project</h2>
       {projects.map(function (project, index) {
         return (
@@ -56,7 +66,7 @@ function SideLeft() {
           </div>
         );
       })}
-      <div id="paging-place">
+      <div id="project-paging-place">
         <Pagination
           totalItems={totalItems}
           currentPage={
@@ -69,6 +79,6 @@ function SideLeft() {
       </div>
     </div>
   );
-}
+});
 
 export default SideLeft;

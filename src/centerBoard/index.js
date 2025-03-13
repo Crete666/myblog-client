@@ -9,49 +9,64 @@ import Pagination from "../pagination";
 function CenterBoard() {
   const [boards, setBoards] = React.useState([]);
   const [totalItems, setTotalitems] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const boardPage = searchParams.get("BP");
   const projectPage = searchParams.get("PP");
 
   React.useEffect(() => {
-    axios
-      .get(`${API_URL}/boards`, {
-        params: {
-          page: boardPage,
-        },
-      })
-      .then(function (result) {
-        const boards = result.data.board;
-        setBoards(boards);
-        setTotalitems(result.data.totalCount);
-      })
-      .catch(function (error) {
-        console.error("에러 발생 : ", error);
-      });
+    async function fetchBoard() {
+      await axios
+        .get(`${API_URL}/boards`, {
+          params: {
+            page: boardPage,
+          },
+        })
+        .then(function (result) {
+          const boards = result.data.board;
+          setBoards(boards);
+          setTotalitems(result.data.totalCount);
+        })
+        .catch(function (error) {
+          console.error("에러 발생 : ", error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    fetchBoard();
   }, [boardPage]);
+
+  if (isLoading) {
+    return <p>데이터를 불러오는 중...</p>;
+  }
 
   return (
     <div id="blog-board">
-      <div className="board-title">
-        <span className="head-text">글제목</span>
+      <div className="title-area">
+        <div className="board-title">
+          <span className="head-text">글제목</span>
+        </div>
+        <div className="board-createAt">
+          <span className="head-text">작성일</span>
+        </div>
       </div>
-      <div className="board-createAt">
-        <span className="head-text">작성일</span>
-      </div>
+
       {boards.map(function (board, index) {
         return (
-          <a
-            href={`/myblog?id=${board.id}&BP=${boardPage}&PP=${projectPage}`}
-            key={index}
-          >
-            <div className="center-board-row">
-              <div className="board-title">{board.title}</div>
-              <div className="board-createAt">
-                {dayjs(board.createdAt).format("YYYY-MM-DD")}
+          <div className="link-area" key={index}>
+            <a
+              href={`/myblog?id=${board.id}&BP=${boardPage}&PP=${projectPage}`}
+            >
+              <div className="center-board-row">
+                <div className="board-title">{board.title}</div>
+                <div className="board-createAt">
+                  {dayjs(board.createdAt).format("YYYY-MM-DD")}
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         );
       })}
       <div id="paging-place">

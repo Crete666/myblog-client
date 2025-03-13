@@ -1,13 +1,10 @@
 import "./index.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config/constants";
 import dayjs from "dayjs";
-
 import styled from "styled-components";
-import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
 
 // 변환시켜준 editorState 값을 넣기 위한 div 태그 css
 const IntroduceContent = styled.div`
@@ -16,6 +13,7 @@ const IntroduceContent = styled.div`
 `;
 
 function DetailBoard() {
+  const idRef = useRef(null);
   const [searchParams] = useSearchParams();
   let id = searchParams.get("id");
   let boardPage = searchParams.get("BP");
@@ -24,47 +22,40 @@ function DetailBoard() {
   const [board, setBoard] = useState(null);
   const navigate = useNavigate();
 
-  function contentData(contents) {
-    console.log("draftToHtml");
-    console.log(draftToHtml(htmlToDraft(contents)));
-    return draftToHtml(htmlToDraft(contents));
-  }
-
-  const getBoard = () => {
-    axios
-      .get(`${API_URL}/boards/${id}`)
+  const getBoard = useCallback(async () => {
+    await axios
+      .get(`${API_URL}/boards/${idRef.current}`)
       .then((result) => {
         setBoard(result.data.board);
-        console.log(result.data.board);
       })
       .catch((error) => {
         console.error(error);
       });
-  };
+  }, []);
 
-  const getBoardRecently = async () => {
+  const getBoardRecently = useCallback(async () => {
     await axios
       .get(`${API_URL}/boardRecently`)
       .then((result) => {
-        id = result.data.id;
+        idRef.current = result.data.id;
         setBoard(result.data.board);
-        contentData = board.contents;
         if (!boardPage && !projectPage) {
-          navigate(`/myblog?id=${id}&BP=1&PP=1`, { replace: true });
+          navigate(`/myblog?id=${idRef.current}&BP=1&PP=1`, { replace: true });
         }
       })
       .catch((error) => {
         console.error(error);
       });
-  };
+  }, [boardPage, projectPage, navigate]);
 
-  useEffect(function () {
+  useEffect(() => {
+    idRef.current = id;
     if (!id && !boardPage && !projectPage) {
       getBoardRecently();
     } else {
       getBoard();
     }
-  }, []);
+  }, [id, boardPage, projectPage, getBoard, getBoardRecently]);
 
   if (board == null) {
     return <h1>게시글 정보를 받아오고 있습니다.</h1>;

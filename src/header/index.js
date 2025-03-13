@@ -5,12 +5,15 @@ function header() {
     <div id="home">
       <div id="Logo">
         <a href="/">
-          <img src="../images/Logo.png" alt="로고" />
+          <img id="header-logo" src="../images/MyBlog.JPG" alt="로고" />
         </a>
       </div>
       <div id="information">
-        <b> Made by 최지혁</b>
-        <a href="https://github.com/Crete666?tab=repositories" target="_blank">
+        <a
+          href="https://github.com/Crete666?tab=repositories"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Github
         </a>
       </div>

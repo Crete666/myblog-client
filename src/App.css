@@ -9,7 +9,7 @@ body,
 #root,
 #root > div {
   height: 100%;
-  background-color: black;
+  background-color: white;
 }
 
 #header {
@@ -36,20 +36,20 @@ body,
   width: 1024px;
   display: flex;
   justify-content: space-between;
-  background-color: #ffffff;
 }
 
 #side-left {
   width: 200px;
+  max-height: 626px;
   display: flex;
-  background-color: aqua;
+  background-color: white;
   justify-content: center;
 }
 
 #side-right {
   width: 200px;
   display: flex;
-  background-color: aqua;
+  background-color: white;
   justify-content: center;
 }
 
@@ -59,4 +59,5 @@ body,
 
 #center {
   width: 600px;
+  background-color: #ffffff;
 }

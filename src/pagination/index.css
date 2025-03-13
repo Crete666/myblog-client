@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  color: #888;
+  color: black;
   font-size: 14px;
 }
 .wrapper a {
@@ -75,6 +75,6 @@
 
 .active {
   font-weight: 700;
-  background: #2f5d62;
+  background: #aaa;
   color: white;
 }

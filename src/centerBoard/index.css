@@ -4,31 +4,40 @@ table {
 
 #blog-board {
   max-width: 600px;
-  border-bottom: 1px solid gray;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-top: 10px;
   padding-bottom: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: white;
+}
+
+.title-area {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
 }
 
 .board-title {
-  min-width: 498px;
   display: flex;
   justify-content: left;
-  padding: 1px;
+  padding: 4px;
   color: black;
 }
 
 .board-createAt {
-  min-width: 98px;
   display: flex;
-  justify-content: right;
-  padding: 1px;
+  justify-content: center;
+  padding: 4px;
   color: black;
+  width: 20%;
 }
 
 .head-text {
   font-size: 15px;
-  color: gray;
+  color: black;
+  padding: 4px;
 }
 
 .detail-link {
@@ -38,6 +47,7 @@ table {
 
 .center-board-row {
   display: flex;
+  justify-content: space-between;
 }
 
 a {
@@ -49,4 +59,8 @@ a {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.link-area {
+  border-bottom: 1px solid gray;
 }

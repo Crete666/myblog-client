@@ -1,21 +1,29 @@
 #image-box {
-  width: 180px;
+  height: 250px;
+  margin-top: 10px;
 }
 
 #image-box > img {
-  width: 180px;
+  width: 192px;
   object-fit: contain;
-  border: 1px solid gray;
+  border: 1px solid black;
   border-radius: 5px;
-  margin-top: 15px;
 }
 
 #front,
 #back {
   font-size: 16px;
   border-bottom: 1px solid gray;
+  padding-bottom: 2px;
 }
 
 #front {
   border-top: 1px solid gray;
+}
+
+#skill-box {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  margin-top: 10px;
 }

@@ -1,3 +1,12 @@
+#sideLeft-project {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  height: auto;
+  padding: 4px;
+}
+
 .project {
   margin-top: 5px;
   border-top: 1px solid gray;
@@ -16,15 +25,18 @@
 .project-image {
   width: 180px;
   height: 150px;
+  object-fit: contain;
 }
 
 .project-name {
   display: flex;
   justify-content: center;
+  margin-bottom: 4px;
 }
 
-#paging-place {
+#project-paging-place {
   display: flex;
   justify-content: center;
   width: 100%;
+  border-top: 1px solid gray;
 }

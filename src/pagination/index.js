@@ -29,6 +29,10 @@ function Pagination({
   const noPrev = start === 1;
   const noNext = start + pageCount - 1 >= totalPages;
   useEffect(() => {
+    console.log("space: ", space);
+    console.log("currentPage: ", currentPage);
+    console.log("start: ", start);
+    console.log("totalPages: ", totalPages);
     if (currentPage === start + pageCount) setStart((prev) => prev + pageCount);
     if (currentPage < start) setStart((prev) => prev - pageCount);
   }, [currentPage, pageCount, start]);
@@ -39,22 +43,23 @@ function Pagination({
         <li className={`move ${noPrev ? "invisible" : ""}`}>
           <Link to={getUrl(space, start - 1)}>이전</Link>
         </li>
-        {[...Array(pageCount)].map((_, i) => (
-          <>
-            {start + i <= totalPages && (
-              <li key={i}>
+        {[...Array(pageCount)].map((_, i) => {
+          const pageNumber = start + i;
+          return (
+            pageNumber <= totalPages && (
+              <li key={pageNumber}>
                 <Link
                   className={`page ${
-                    currentPage === start + i ? "active" : ""
+                    currentPage === pageNumber ? "active" : ""
                   }`}
-                  to={getUrl(space, start + i)}
+                  to={getUrl(space, pageNumber)}
                 >
-                  {start + i}
+                  {pageNumber}
                 </Link>
               </li>
-            )}
-          </>
-        ))}
+            )
+          );
+        })}
         <li className={`move ${noNext ? "invisible" : ""}`}>
           <Link to={getUrl(space, start + pageCount)}>다음</Link>
         </li>
