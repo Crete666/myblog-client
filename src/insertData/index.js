@@ -152,11 +152,15 @@ function InsertData() {
         </Form>
         <Divider />
         <div id="insert-project">
-          <b>Project 등록하기</b>
+          <span className="item-title">Project 등록하기</span>
           <Form name="프로젝트 업로드" onFinish={onSubmitProject}>
             <Form.Item
               name="name"
-              label={<div className="upload-label">프로젝트 명</div>}
+              label={
+                <div className="upload-label">
+                  <b>프로젝트 명</b>
+                </div>
+              }
               rules={[{ required: true, message: "프로젝트 명을 입력하세요." }]}
             >
               <Input
@@ -167,7 +171,11 @@ function InsertData() {
             </Form.Item>
             <Form.Item
               name="project-img"
-              label={<div className="upload-label">프로젝트 사진</div>}
+              label={
+                <div className="upload-label">
+                  <b>프로젝트 사진</b>
+                </div>
+              }
               rules={[{ required: true, message: "사진을 등록하세요." }]}
             >
               <Upload
@@ -189,7 +197,11 @@ function InsertData() {
             </Form.Item>
             <Form.Item
               name="hubUrl"
-              label={<div className="upload-label">Github 주소</div>}
+              label={
+                <div className="upload-label">
+                  <b>Github 주소</b>
+                </div>
+              }
               rules={[
                 { required: true, message: "Github 주소를 입력해주세요." },
               ]}

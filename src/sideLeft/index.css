@@ -5,6 +5,9 @@
   border-radius: 4px;
   height: auto;
   padding: 4px;
+  padding-bottom: 9px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project {
@@ -39,4 +42,5 @@
   justify-content: center;
   width: 100%;
   border-top: 1px solid gray;
+  margin-top: auto;
 }
